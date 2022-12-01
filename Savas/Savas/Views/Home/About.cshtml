@@ -1,0 +1,400 @@
+﻿
+@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<br />
+<br />
+
+
+<button class="btn btn-success" data-toggle="modal" data-target="#successymodal">
+    Yeni Savaşçı Ekle
+</button>
+
+<div class="modal fade" id="successymodal">
+    <div class="modal-dialog modal-dialog-centered">
+        <form action="/Home/Kaydet/" method="post">
+            <div class="modal-content border-success">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white"> Yeni Savaşçı  Bilgileri </h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group col-lg-12">
+                        <label>Savaşçı Adı</label>
+                        <input type="text" class="form-control" name="SAVASCIADI">
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <label>Sağlık</label>
+                        <input type="text" class="form-control" name="CANPUAN">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times"></i> Kapat </button>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Bilgileri Kaydet</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr />
+
+
+
+
+<div class="card">
+    <div class="card-header bg-dark ">
+
+
+
+        
+
+            <button class="btn btn-success" data-toggle="collapse" data-target="#div1" style="color:white;width:100%;">
+                <a class="card-link text-light" data-toggle="collapse" href="#div1"> Savaşçılar </a>
+            </button>
+
+        
+
+
+       
+
+    </div>
+    <div id="div1" class="collapse in bg-dark ">
+
+
+
+        @foreach (Savas.Models.ayarlar item in ViewBag.ayarlar)
+        {
+            string Duzenle = "Duz" + item.ID;
+            string Sil = "Sil" + item.ID;
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading bg-dark text-light">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#@item.ID">
+                                @item.ID) @item.SAVASCIADI
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="@item.ID" class="panel-collapse collapse ">
+                        <div class="panel-body">
+                            <div class="card-body">
+
+
+
+
+
+                                <th scope="row">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#Duzenle">
+                                        Ekle
+                                    </button>
+
+                                    <div class="modal fade" id="Duzenle">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <form action="/Home/Duzenle/" method="post">
+                                                <div class="modal-content border-primary">
+                                                    <div class="modal-header bg-primary">
+                                                        <h5 class="modal-title text-white">Bilgileri Ekle </h5>
+                                                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="form-group col-lg-12">
+                                                            <select name="tur" id="tur">
+                                                                <option value="@item.ATAK">Atak</option>
+                                                                <option value="@item.DEFANS">Defans</option>
+                                                               
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-lg-12">
+                                                            <select name="altur" id="altur">
+                                                                <option value="uzun">Uzun Mesafe</option>
+                                                                <option value="kısa">Kısa Mesafe</option>
+                                                                
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times"></i> Kapat </button>
+                                                        <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Bilgileri Kaydet</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </th>
+
+                                <br />
+                                <br />
+                                <br />
+
+
+
+                                
+
+
+
+
+                                    <div class="table-responsive">
+                                        <table id="example" class="table table-striped table-hover table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Savaşçı Adı</th>
+                                                    <th scope="col">Sağlık</th>
+                                                    <th scope="col">Düzenle</th>
+                                                    <th scope="col">Sil</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td scope="row">@item.ID </td>
+                                                    <td scope="row">@item.SAVASCIADI</td>
+                                                    <td scope="row">@item.CANPUAN</td>
+                                                    <td scope="row">
+                                                        <button class="btn btn-warning" data-toggle="modal" data-target="#@Duzenle">
+                                                            Güncelle
+                                                        </button>
+                                                        <div class="modal fade" id="@Duzenle">
+                                                            <div class="modal-dialog modal-dialog-centered ">
+                                                                <form action="/Home/Duzenle/" method="post">
+                                                                    <div class="modal-content border-warning">
+                                                                        <div class="modal-header bg-warning">
+                                                                            <h5 class="modal-title text-white">Bilgileri Güncelle </h5>
+                                                                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <input type="text" name="id" value="@item.ID" hidden />
+                                                                            <div class="form-group col-lg-12">
+                                                                                <label>Savaşçı Adı</label>
+                                                                                <input type="text" class="form-control" value="@item.SAVASCIADI" name="SAVASCIADI">
+                                                                            </div>
+                                                                            <div class="form-group col-lg-12">
+                                                                                <label>Sağlık</label>
+                                                                                <input type="text" class="form-control" value="@item.CANPUAN" name="CANPUAN">
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times"></i> Kapat </button>
+                                                                            <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Düzenlemeyi Kaydet</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td scope="row">
+                                                        <button class="btn btn-danger" data-toggle="modal" data-target="#@Sil">
+                                                            Savaşçıyı  Sil
+                                                        </button>
+                                                        <div class="modal fade" id="@Sil">
+                                                            <div class="modal-dialog modal-dialog-centered ">
+                                                                <form action="/Home/Kaydet/">
+                                                                    <div class="modal-content border-danger">
+                                                                        <div class="modal-header bg-danger">
+                                                                            <h5 class="modal-title text-white">Görev Kalıcı Olarak Silinecek</h5>
+                                                                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="form-group col-lg-12">
+                                                                                <label>Savaşçı Adı</label>
+                                                                                <input type="text" class="form-control" value="@item.SAVASCIADI" name="SAVASCIADI" readonly>
+                                                                            </div>
+                                                                            <div class="form-group col-lg-12">
+                                                                                <label>Sağlık</label>
+                                                                                <input type="text" class="form-control" value="@item.CANPUAN" name="CANPUAN" readonly>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-dark" data-dismiss="modal"> Kapat </button>
+                                                                            <a href="/Home/Sil/@item.ID" class="btn btn-danger">
+                                                                                Görevi Sil
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <th scope="row">  Tür  </th>
+                                                    <th scope="row">  Alt Tür  </th>
+                                                    <th scope="row">hasar  </th>
+
+
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row">
+
+                                                        <select name="tur" id="#@item.ID">
+                                                            <option value="ATAK">Atak</option>
+                                                            <option value="Defans">Defans</option>
+
+                                                        </select>
+
+                                                    </td>
+                                                    <td scope="row">
+                                                        <select name="alttur">
+
+                                                            <option value="kısa">Kısa Mesafe</option>
+                                                            <option value="uzun">Uzun Mesafe</option>
+
+                                                        </select>
+                                                    </td>
+                                                    <td scope="row"> </td>
+                                                    <td scope="row">
+                                                        <button class="btn btn-success" data-toggle="modal" data-target="#successymodal">
+                                                            Kaydet
+                                                        </button>
+
+                                                        <div class="modal fade" id="successymodal">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <form action="/Home/Kaydet/" method="post">
+                                                                    <div class="modal-content border-success">
+                                                                        <div class="modal-header bg-success">
+                                                                            <h5 class="modal-title text-white"> Yeni Savaşçı  Bilgileri </h5>
+                                                                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="form-group col-lg-12">
+                                                                                <label>Savaşçı Adı</label>
+                                                                                <input type="text" class="form-control" name="SAVASCIADI">
+                                                                            </div>
+                                                                            <div class="form-group col-lg-12">
+                                                                                <label>Sağlık</label>
+                                                                                <input type="text" class="form-control" name="CANPUAN">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fa fa-times"></i> Kapat </button>
+                                                                            <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Bilgileri Kaydet</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td scope="row">
+                                                        <button class="btn btn-danger" data-toggle="modal" data-target="#@Sil">
+                                                            Güçü Sil
+                                                        </button>
+                                                        <div class="modal fade" id="@Sil">
+                                                            <div class="modal-dialog modal-dialog-centered ">
+                                                                <form action="/Home/Kaydet/">
+                                                                    <div class="modal-content border-danger">
+                                                                        <div class="modal-header bg-danger">
+                                                                            <h5 class="modal-title text-white">Görev Kalıcı Olarak Silinecek</h5>
+                                                                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="form-group col-lg-12">
+                                                                                <label>Savaşçı Adı</label>
+                                                                                <input type="text" class="form-control" value="@item.SAVASCIADI" name="SAVASCIADI" readonly>
+                                                                            </div>
+                                                                            <div class="form-group col-lg-12">
+                                                                                <label>Sağlık</label>
+                                                                                <input type="text" class="form-control" value="@item.CANPUAN" name="CANPUAN" readonly>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-dark" data-dismiss="modal"> Kapat </button>
+                                                                            <a href="/Home/Sil/@item.ID" class="btn btn-danger">
+                                                                                Görevi Sil
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                             
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+       
+
+        }
+
+
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

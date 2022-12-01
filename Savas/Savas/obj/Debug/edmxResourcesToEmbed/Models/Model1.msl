@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CaseModelStoreContainer" CdmEntityContainer="CaseEntities">
+    <EntitySetMapping Name="ayarlars">
+      <EntityTypeMapping TypeName="CaseModel.ayarlar">
+        <MappingFragment StoreEntitySet="ayarlar">
+          <ScalarProperty Name="UZUNMESAFE" ColumnName="UZUNMESAFE" />
+          <ScalarProperty Name="KISAMESAFE" ColumnName="KISAMESAFE" />
+          <ScalarProperty Name="DEFANS" ColumnName="DEFANS" />
+          <ScalarProperty Name="ATAK" ColumnName="ATAK" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SAVASCIADI" ColumnName="SAVASCIADI" />
+          <ScalarProperty Name="CANPUAN" ColumnName="CANPUAN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SAVAS">
+      <EntityTypeMapping TypeName="CaseModel.SAVA">
+        <MappingFragment StoreEntitySet="SAVAS">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ATAK" ColumnName="ATAK" />
+          <ScalarProperty Name="DEFANS" ColumnName="DEFANS" />
+          <ScalarProperty Name="KISAMESAFE" ColumnName="KISAMESAFE" />
+          <ScalarProperty Name="UZUNMESAFE" ColumnName="UZUNMESAFE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

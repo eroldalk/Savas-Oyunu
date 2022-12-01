@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ayarlar">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SAVASCIADI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CANPUAN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SAVA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ATAK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DEFANS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="KISAMESAFE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="UZUNMESAFE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="CaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ayarlars" EntityType="Self.ayarlar" />
+    <EntitySet Name="SAVAS" EntityType="Self.SAVA" />
+  </EntityContainer>
+</Schema>

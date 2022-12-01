@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ayarlar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SAVASCIADI" Type="nvarchar" MaxLength="20" />
+          <Property Name="CANPUAN" Type="nvarchar" MaxLength="20" />
+          <Property Name="ATAK" Type="nvarchar" MaxLength="20" />
+          <Property Name="DEFANS" Type="nvarchar" MaxLength="20" />
+          <Property Name="KISAMESAFE" Type="nvarchar" MaxLength="20" />
+          <Property Name="UZUNMESAFE" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SAVAS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ATAK" Type="nvarchar" MaxLength="20" />
+          <Property Name="DEFANS" Type="nvarchar" MaxLength="20" />
+          <Property Name="KISAMESAFE" Type="nvarchar" MaxLength="20" />
+          <Property Name="UZUNMESAFE" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_SAVAS_ayarlar">
+          <End Role="ayarlar" Type="Self.ayarlar" Multiplicity="1" />
+          <End Role="SAVAS" Type="Self.SAVAS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ayarlar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SAVAS">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CaseModelStoreContainer">
+          <EntitySet Name="ayarlar" EntityType="Self.ayarlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SAVAS" EntityType="Self.SAVAS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SAVAS_ayarlar" Association="Self.FK_SAVAS_ayarlar">
+            <End Role="ayarlar" EntitySet="ayarlar" />
+            <End Role="SAVAS" EntitySet="SAVAS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ayarlar">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SAVASCIADI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CANPUAN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ATAK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DEFANS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="KISAMESAFE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UZUNMESAFE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SAVA" Relationship="CaseModel.FK_SAVAS_ayarlar" FromRole="ayarlar" ToRole="SAVA" />
+        </EntityType>
+        <EntityType Name="SAVA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ATAK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DEFANS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="KISAMESAFE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UZUNMESAFE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ayarlar" Relationship="CaseModel.FK_SAVAS_ayarlar" FromRole="SAVA" ToRole="ayarlar" />
+        </EntityType>
+        <EntityContainer Name="CaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ayarlars" EntityType="Self.ayarlar" />
+          <EntitySet Name="SAVAS" EntityType="Self.SAVA" />
+          <AssociationSet Name="FK_SAVAS_ayarlar" Association="CaseModel.FK_SAVAS_ayarlar">
+            <End Role="ayarlar" EntitySet="ayarlars" />
+            <End Role="SAVA" EntitySet="SAVAS" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_SAVAS_ayarlar">
+          <End Type="CaseModel.ayarlar" Role="ayarlar" Multiplicity="1" />
+          <End Type="CaseModel.SAVA" Role="SAVA" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ayarlar">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SAVA">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CaseModelStoreContainer" CdmEntityContainer="CaseEntities">
+          <EntitySetMapping Name="ayarlars">
+            <EntityTypeMapping TypeName="CaseModel.ayarlar">
+              <MappingFragment StoreEntitySet="ayarlar">
+                <ScalarProperty Name="UZUNMESAFE" ColumnName="UZUNMESAFE" />
+                <ScalarProperty Name="KISAMESAFE" ColumnName="KISAMESAFE" />
+                <ScalarProperty Name="DEFANS" ColumnName="DEFANS" />
+                <ScalarProperty Name="ATAK" ColumnName="ATAK" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SAVASCIADI" ColumnName="SAVASCIADI" />
+                <ScalarProperty Name="CANPUAN" ColumnName="CANPUAN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SAVAS">
+            <EntityTypeMapping TypeName="CaseModel.SAVA">
+              <MappingFragment StoreEntitySet="SAVAS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ATAK" ColumnName="ATAK" />
+                <ScalarProperty Name="DEFANS" ColumnName="DEFANS" />
+                <ScalarProperty Name="KISAMESAFE" ColumnName="KISAMESAFE" />
+                <ScalarProperty Name="UZUNMESAFE" ColumnName="UZUNMESAFE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
